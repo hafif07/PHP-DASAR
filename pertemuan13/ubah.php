@@ -4,12 +4,14 @@ require 'functions.php';
 // ambil data
 $id = $_GET["id"];
 $santri = query("SELECT * FROM santri WHERE id = $id")[0];
-
 $check= null;
 $check_role = "";
 
+
 if(isset($_POST["kirim"])){
 	$check = ubah($_POST);
+	var_dump($check);
+
 }
 
 if($check > 0){
@@ -23,6 +25,18 @@ if($check > 0){
 elseif($check < 0){
 	$check_role = "Data Gagal Diubah";
 }
+elseif($check === false){
+	$check_role = "Data Gagal Diubah";
+}
+elseif($check === "not_change"){
+	echo "
+		<script>
+			alert('Tidak ada perubahan data')
+			document.location.href = 'index.php'
+		</script>
+	";
+}
+
 ?>
 
 
@@ -33,8 +47,9 @@ elseif($check < 0){
 </head>
 <body>
 	<h1>Ubah Data Santri</h1>
-	<form action="" method="post">
+	<form action="" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="id" value="<?php echo $santri["id"] ?>" >
+		<input type="hidden" name="gambarLama" value="<?php echo $santri["gambar"] ?>">
 		<label for="nis">No Induk Santri</label>
 		<br>
 		<input type="text" name="nis" id="nis" required value="<?php echo $santri["nis"] ?>">
@@ -53,7 +68,9 @@ elseif($check < 0){
 		<br>
 		<label for="gambar">Upload Gambar</label>
 		<br>
-		<input type="text" name="gambar"id="gambar" required value="<?php echo $santri["gambar"] ?>">
+		<img src="assets/<?php echo $santri["gambar"] ?>" width="40">
+		<br>
+		<input type="file" name="gambar"id="gambar" >
 		<br>
 		<p><?php echo $check_role; ?></p>
 		<button type="submit" name="kirim">Ubah Data</button>

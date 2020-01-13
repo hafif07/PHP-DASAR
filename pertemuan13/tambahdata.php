@@ -18,6 +18,9 @@ if($check > 0){
 elseif($check < 0){
 	$check_role = "Data Gagal Ditambahkan";
 }
+elseif($check === false){
+	$check_role = "Data Gagal Ditambahkan";
+}
 ?>
 
 
@@ -28,7 +31,7 @@ elseif($check < 0){
 </head>
 <body>
 	<h1>Tambah Data Santri</h1>
-	<form action="" method="post">
+	<form action="" method="post" enctype="multipart/form-data">
 		<label for="nis">No Induk Santri</label>
 		<br>
 		<input type="text" name="nis" id="nis" required>
@@ -47,7 +50,7 @@ elseif($check < 0){
 		<br>
 		<label for="gambar">Upload Gambar</label>
 		<br>
-		<input type="text" name="gambar"id="gambar" required>
+		<input type="file" name="gambar"id="gambar" required>
 		<br>
 		<p><?php echo $check_role; ?></p>
 		<button type="submit" name="kirim">Kirim Data</button>
