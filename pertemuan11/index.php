@@ -30,7 +30,7 @@ $santri = query("SELECT * FROM santri");
 		<tr>
 			<td><?php echo $nourut; ?></td>
 			<td>
-				<a href="">Edit</a> |
+				<a href="ubah.php?id=<?php echo $individu["id"]?>">Edit</a> |
 				<a href="hapus.php?id=<?php echo $individu["id"]?>"onClick="return confirm('yaquueeen ?')">Delete</a>
 			</td>
 			<td>

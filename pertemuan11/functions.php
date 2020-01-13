@@ -39,5 +39,28 @@ function hapus($id){
 	$check = mysqli_affected_rows($database);
 	return $check;
 }
+function ubah($data){
+	global $database;
+	//htmlspecialchar => menjadikan html sebagai string bukan scrip
+	$id=$data["id"];
+	$nis=htmlspecialchars($data["nis"]);
+	$nama=htmlspecialchars($data["nama"]);
+	$email=htmlspecialchars($data["email"]);
+	$jurusan=htmlspecialchars($data["jurusan"]);
+	$gambar=htmlspecialchars($_POST["gambar"]);
+
+	$query="UPDATE santri SET 
+	nama= '$nama',
+	nis= '$nis',
+	email='$email',
+	jurusan = '$jurusan',
+	gambar = '$gambar'
+	WHERE id= $id
+	";
+	mysqli_query($database,$query);
+	//cek berhasil atau tidak
+	$check = mysqli_affected_rows($database);
+	return $check;
+}
 
 ?>

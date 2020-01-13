@@ -1,8 +1,16 @@
 <?php 
 
 require "functions.php";
-$santri = query("SELECT * FROM santri");
+$santri = query("SELECT * FROM santri ");
 
+// ketika tombol cari ditekan
+if(isset($_POST["cari"])){
+	$santri = cari($_POST["keyword"]);
+}
+
+if(isset($_POST["refresh"])){
+	$santri = query("SELECT * FROM santri ");
+}
  ?>
 <!DOCTYPE html>
 <html>
@@ -14,6 +22,15 @@ $santri = query("SELECT * FROM santri");
 	<form action="tambahdata.php" method="get">
 		<button type="submit" name="tambah">Tambah Data</button>
 	</form>
+	<br>
+	<form action="" method="post">
+		<input type="text" name="keyword" size="40" autofocus placeholder="Masukan keyword pencarian" autocomplete="off">
+		<button type="submit" name="cari">Cari</button>
+		<button type="submit" name="refresh">Refresh Data</button>
+	</form>
+	<!-- <form action="" method="get">
+		<button type="submit" name="refresh">Refresh</button>
+	</form> -->
 	<br>
 	<table border="1"cellspacing='0'cellpadding="10">
 		<tr>
@@ -30,7 +47,7 @@ $santri = query("SELECT * FROM santri");
 		<tr>
 			<td><?php echo $nourut; ?></td>
 			<td>
-				<a href="">Edit</a> |
+				<a href="ubah.php?id=<?php echo $individu["id"]?>">Edit</a> |
 				<a href="hapus.php?id=<?php echo $individu["id"]?>"onClick="return confirm('yaquueeen ?')">Delete</a>
 			</td>
 			<td>
