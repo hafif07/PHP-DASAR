@@ -4,6 +4,13 @@ $santri = query("SELECT * FROM santri ");
 
 
 
+//kondisikan session jika user belum login
+if(!isset($_SESSION["login"])){
+	header("Location:login.php");
+	exit;
+}
+
+
 
 // ketika tombol cari ditekan
 if(isset($_POST["cari"])){
@@ -21,6 +28,9 @@ if(isset($_POST["refresh"])){
 </head>
 <body>
 	<h1>Daftar Santri</h1>
+	<form action="logout.php" method="get">
+		<button type="submit" name="tambah" onClick="return confirm('yaqueeeen ingin logout ?')">Log Out</button>
+	</form>
 	<form action="tambahdata.php" method="get">
 		<button type="submit" name="tambah">Tambah Data</button>
 	</form>
