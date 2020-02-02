@@ -90,7 +90,7 @@ function upload(){
 	move_uploaded_file($tmpName, 'assets/'.$namaFileBaru );
 	return $namaFileBaru;
 }
-
+//membuat function hapus
 function hapus($id){
 	global $database;
 	$query = "DELETE FROM santri WHERE id=$id";
